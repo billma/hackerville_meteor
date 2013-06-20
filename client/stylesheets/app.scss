@@ -1,0 +1,18 @@
+$mc-dark: #002836;
+$mc-medium: #003a4f;
+
+body{
+  background:$mc-dark;
+}
+#header{
+  height:50px;
+  background:$mc-medium;
+}
+#main{
+  background:white;
+  height:600px;
+}
+#footer{
+  height:80px;
+  background:$mc-dark;
+}
