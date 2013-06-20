@@ -1,0 +1,16 @@
+body{
+  background:#002836;
+}
+#header{
+  height:50px;
+  background:#003a4f;
+}
+#main{
+  background:white;
+  min-height:650px;
+}
+
+#footer{
+  height:80px;
+  background:#002836;
+}
