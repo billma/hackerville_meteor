@@ -1,6 +1,6 @@
 Accounts.onCreateUser (options, user) ->
   options.profile.name = user.services.facebook.name
-  options.profile.picture = "http://graph.facebook.com/" + user.services.facebook.id + "/picture/?type=large"
+  options.profile.picture = "http://graph.facebook.com/" + user.services.facebook.id + "/picture?type=square"
   options.profile.points = 0
   user.profile = options.profile
   return user

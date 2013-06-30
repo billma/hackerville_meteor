@@ -5,7 +5,7 @@
   {{/each}}
 </template>
 
-<template name="chatPage">
+<template name="chatPage-old">
 {{#with companyInfo}}
 <h1>Chat Page for {{name}}</h1>
 {{> onlineUsers}}
@@ -23,16 +23,12 @@
 </template>
 
 <template name="onlineUsers">
-<h4>onlineUsers</h4>
-<div id="onlineUsersContainer">
-</div>
-<hr />
+<div id="onlineUsersContainer"></div>
 </template>
 
 <template name="onlineUser">
-<div>
-  <img src="{{picture}}" alt="" />
-  {{points}}: {{name}}
+<div class="user online">
+  {{name}} - {{points}}
+  <img src="{{picture}}" alt="" class="img-circle" />
 </div>
-<hr />
 </template>
