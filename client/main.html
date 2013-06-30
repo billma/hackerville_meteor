@@ -2,12 +2,15 @@
   <meta charset="UTF-8">
   <title></title>
   <script type='text/javascript' src='https://cdn.firebase.com/v0/firebase.js'></script>
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css" />
 </head>
 <body>
-  <div id="header"></div>
+  <div id="header">
+      {{loginButtons}}
+  </div>
   <div id="main">
     <div class="container">
-      {{loginButtons}}
       {{renderPage}}
     </div>
   </div>
