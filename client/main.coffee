@@ -1,17 +1,30 @@
+Template.loginButton.helpers
+  buttonText: ->
+    if Meteor.user()
+      return "signout"
+    return "Login With Facebook"
+
 Template.loginButton.events
   "click #loginButton": (e)->
-    console.log "clicked button"
     target = $(e.target)
     if target.text() == "signout"
-      console.log "logging out man"
       Meteor.logout ->
         target.text("Login With Facebook")
-        console.log "logged out"
+        console.log userRef
+        if userRef
+          userRef.remove()
+          userRef = ""
         return
       return
-      
     Meteor.loginWithFacebook {}, (err) ->
       target.text("signout")
+      console.log Session.get "companyPage"
+      if Session.get "companyPage" and Meteor.user()
+        console.log "User present in chat"
+        console.log Meteor.user()
+        userRef = new Firebase("https://hackerville.firebaseIO.com/room/#{company._id}/#{Meteor.user()._id}")
+        userRef.set {points: Meteor.user().profile.points, name: Meteor.user().profile.name, picture: Meteor.user().profile.picture }
+        userRef.onDisconnect().remove()
     return
 
 
@@ -66,17 +79,6 @@ Template.onlineUsers.created = ->
         Template[ onlineUserTemplate ](v)
       $("#onlineUsersContainer").append fragment
       console.log fragment
-
-  Deps.autorun ->
-    if Meteor.user()
-      userRef = new Firebase("https://hackerville.firebaseIO.com/room/#{company._id}/#{Meteor.user()._id}")
-      userRef.set {points: Meteor.user().profile.points, name: Meteor.user().profile.name, picture: Meteor.user().profile.picture }
-      userRef.onDisconnect().remove()
-    else
-      if userRef != ""
-        userRef.remove()
-        userRef = ""
-
 
 Template.onlineUsers.destroyed = ->
   if Meteor.user()
