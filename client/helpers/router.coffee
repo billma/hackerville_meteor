@@ -1,5 +1,8 @@
 Meteor.Router.add
-  '/': 'index'
+  '/':
+    to: 'index'
+    and: () ->
+      Session.set 'companyPage', ""
   '/room': 'rooms'
   "/rooms/:_id":
     to: "chatPage"
