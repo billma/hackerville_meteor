@@ -1,0 +1,28 @@
+<template name="index">
+<h1>Companies</h1>
+  {{#each companies }}
+  <a href="{{chatPagePath this}}">{{name}}</a>
+  {{/each}}
+</template>
+
+<template name="chatPage">
+{{#with companyInfo}}
+<h1>Chat Page for {{name}}</h1>
+{{> onlineUsers}}
+{{/with}}
+
+
+{{#if currentUser}}
+<input id="messageInput" type="text" />
+{{/if}}
+<div id="messageContainer">
+  {{#each messages}}
+  <p><span class="btn vote {{disableVote}}" >{{votes}} <3</span>{{name}}: {{message}}</p>
+  {{/each}}
+</div>
+</template>
+
+<template name="onlineUsers">
+<h4>onlineUsers</h4>
+<hr />
+</template>
