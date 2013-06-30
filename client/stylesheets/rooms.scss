@@ -126,8 +126,47 @@
       height: 30%;
     }
     #friends-lists{
+      position: relative;
       width: 100%;
       height: 70%;
+      h5{
+        width: 100%;
+        border-bottom: 1px solid $border-blue;
+        margin: 0;
+        padding-bottom: 3px;
+        color: $dark-grey;
+      }
+      h5:before{
+        content: "";
+        margin-left: 10px;
+      }
+      .list{
+        width: 100%;
+        height: 305px ;
+        overflow: auto;
+        .user{
+          width: 100%;
+          font-weight: bold;
+          margin: 5px 0;
+          color: $mc-light;
+          
+        }
+        .user:before{
+          display: inline-block;
+          content: "";
+          width: 10px; height: 10px;
+          border-radius: 100%;
+          margin-right: 20px;
+          margin-left: 10px;
+        }
+        .online:before{
+          background: $online-green;
+        }
+        .away:before{
+          background: $away-orange;
+        }
+
+      }
     }
   }
   .right:before{
