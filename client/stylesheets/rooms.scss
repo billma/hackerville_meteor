@@ -1,21 +1,6 @@
-$border-grey: #DDD;
-$border-blue: #ddeaf8;
+@import "app.scss";
 
-
-#rooms-top{
-  height: 50px;
-  #tabs{
-    width: 65%;
-    height: 100%;
-    margin-left: 15%;
-  }
-
-}
-
-#rooms-center{
-  height: 470px;
-  border-top: 1px solid $border-grey;
-  border-bottom: 1px solid $border-grey;
+#rooms{
   .left,.middle,.right{
     position: relative;
     float: left;
@@ -24,6 +9,108 @@ $border-blue: #ddeaf8;
   .left{
     width: 15%;
   }
+  .right{
+    width: 20%;
+  }
+  .middle{
+    width: 65%;
+  }
+}
+
+#rooms-top{
+  height: 50px;
+  #tabs{
+    width: 65%;
+    height: 100%;
+    margin-left: 15%;
+    .tab{
+      position:relative;
+      bottom: -14px;
+      width: 18%;
+      height: 70%;
+      border: 1px solid $border-grey;
+      float:left;
+      background: $light-grey;
+      border-top-left-radius: 3px;
+      border-top-right-radius: 3px;
+      line-height: 3em;
+      p{
+        position:relative;
+        left: - 5px;
+        width: 90%;
+        height: 100%;
+        margin: 0 auto;
+        color: $mc-light;
+        font-weight: bold;
+        text-align: center;
+        overflow:hidden;
+      }
+      .close{
+        position: absolute;
+        right: 0;
+        top: 0;
+        border-radius: 3px;
+        width: 40px;
+        height: 100%;
+        text-align: center;
+        background: -webkit-gradient(linear, left top, right top, 
+        color-stop(0%,rgba(238, 238, 238,0)), 
+        color-stop(15%, rgba(238, 238, 238,1)),
+        color-stop(100%,rgba(238, 238, 238,1)));
+        color: $medium-grey;
+        font-size: 20px;
+      }
+    }
+    .active-tab{
+      bottom: -6px;
+      height: 85%;
+      border-bottom: 1px solid white;
+      z-index: 101;
+      background: white;
+      box-shadow: 0 -2px 3px $dark-grey;
+      p{
+        color: $mc-medium !important;
+      }
+      .close{
+        background: -webkit-gradient(linear, left top, right top, 
+        color-stop(0%,rgba(255, 255, 255,0)), 
+        color-stop(15%, rgba(255, 255, 255,1)),
+        color-stop(100%,rgba(255, 255, 255,1))) !important;
+      }
+      
+    }
+    .tab:hover:after{
+      color: $darker-grey;
+    }
+    .tab:hover {
+      cursor: pointer;
+    }
+    .tab:after :hover{
+      color: $medium-grey;
+    }
+    #new-tab{
+      position: relative;
+      bottom: -20px;
+      float: left;
+      border: 1px solid $border-grey;
+      padding: 1px 8px;
+      margin-left: 5px;
+      border-radius: 3px;
+      font-weight: bold;
+      background: $light-grey;
+    }
+    #new-tab:before{
+      content: "+";
+      display: block;
+    }
+  }
+
+}
+#rooms-center{
+  height: 470px;
+  border-top: 1px solid $border-grey;
+  border-bottom: 1px solid $border-grey;
+
   .left:before{
     position: absolute;
     content: "";
@@ -33,9 +120,8 @@ $border-blue: #ddeaf8;
     height: 100%;
   }
   .right{
-    width: 20%;
     #company{
-      background: pink;
+      background: $light-grey;
       width: 100%;
       height: 30%;
     }
@@ -52,11 +138,35 @@ $border-blue: #ddeaf8;
     width: 100%;
     height: 100%; 
   }
-  .middle{
-    width: 65%;
-  }
 }
 
 #rooms-bottom{
   height: 80px;
+  .middle{
+    margin-top: 5px;
+    text-align: center;
+  }
+  #profile-icon{
+    width: 50px;
+    height: 50px;
+  } 
+  #write-chat{
+    height: 50px;
+    width: 75%;
+    border-radius: 0;
+    margin: 0;
+    resize: none;
+  }
+  #send-chat{
+    display: inline-block;
+    width: 5%;
+    border: 1px solid $border-grey;
+    height: 50px;
+    padding: 4px;
+    vertical-align: top;
+    line-height: 3.5em;
+    overflow: hidden;
+  }
+  
 }
+

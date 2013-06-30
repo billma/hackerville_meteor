@@ -1,17 +1,43 @@
 <template name="rooms">
-<div id="rooms-top">
-  <div id="tabs">
-
+<div id="rooms">
+  <div id="rooms-top">
+    <div id="tabs">
+      <div class="tab active-tab">
+        <p>Tokbox</p>
+        <div class="close">
+          <i class="icon-remove-circle"></i>
+        </div>
+      </div>  
+      <div class="tab">
+        <p>Firebase api is </p>
+        <div class="close">
+          <i class="icon-remove-circle"></i>
+        </div>
+      </div>  
+      <div class="tab"></div>  
+      <div class="tab"></div>  
+      <div class="tab"></div> 
+      <div id="new-tab"></div>
+    </div>
+  </div>
+  <div id="rooms-center">
+    <div class="left"></div>
+    <div class="middle"></div>
+    <div class="right">
+      <div id="company"></div>
+      <div id="friends-lists"></div>
+    </div>
+  </div>
+  <div id="rooms-bottom">
+    <div class="left"></div>
+    <div class="middle">
+      <img id="profile-icon" src="/img/me.png" alt="" class="img-polaroid" />
+      <textarea id="write-chat" name="" rows="10" cols="30"></textarea>
+      <span id="send-chat">Send</span>
+    </div>
+    <div class="right"></div>
   </div>
 </div>
-<div id="rooms-center">
-  <div class="left"></div>
-  <div class="middle"></div>
-  <div class="right">
-    <div id="company"></div>
-    <div id="friends-lists"></div>
-  </div>
-</div>
-<div id="rooms-bottom"></div>
 </template>
+
 
