@@ -1,3 +1,20 @@
+Template.loginButton.events
+  "click #loginButton": (e)->
+    console.log "clicked button"
+    target = $(e.target)
+    if target.text() == "signout"
+      console.log "logging out man"
+      Meteor.logout ->
+        target.text("Login With Facebook")
+        console.log "logged out"
+        return
+      return
+      
+    Meteor.loginWithFacebook {}, (err) ->
+      target.text("signout")
+    return
+
+
 Template.index.companies = ->
   return Companies.find()
 
@@ -7,7 +24,7 @@ Template.chatPage.helpers
   messages: ->
     return Messages.find({ companyId: Session.get "companyPage" }, {sort: {createdAt: -1}})
   disableVote: ->
-    if _.contains( @voters, Meteor.user()._id )
+    if !Meteor.user() or _.contains( @voters, Meteor.user()._id )
       return "disabled"
     return "enabled"
 
@@ -27,11 +44,13 @@ Template.chatPage.events
         "voters": []
       $(e.target).val("")
 
+userRef = ""
+
+
 Template.onlineUsers.created = ->
   company = Companies.findOne({ _id: Session.get "companyPage" })
   onlineUserRef = new Firebase("https://hackerville.firebaseIO.com/room/#{company._id}")
   if Meteor.user()
-    console.log "user is alive"
     userRef = new Firebase("https://hackerville.firebaseIO.com/room/#{company._id}/#{Meteor.user()._id}")
     userRef.set {points: Meteor.user().profile.points, name: Meteor.user().profile.name, picture: Meteor.user().profile.picture }
     userRef.onDisconnect().remove()
@@ -40,7 +59,6 @@ Template.onlineUsers.created = ->
     users = snap.val()
     if !users
       return
-    window.users = users
     $("#onlineUsersContainer").html ""
     for k,v of users
       onlineUserTemplate = "onlineUser"
@@ -48,9 +66,21 @@ Template.onlineUsers.created = ->
         Template[ onlineUserTemplate ](v)
       $("#onlineUsersContainer").append fragment
       console.log fragment
-      console.log v.name
-      console.log v.picture
+
+  Deps.autorun ->
+    if Meteor.user()
+      userRef = new Firebase("https://hackerville.firebaseIO.com/room/#{company._id}/#{Meteor.user()._id}")
+      userRef.set {points: Meteor.user().profile.points, name: Meteor.user().profile.name, picture: Meteor.user().profile.picture }
+      userRef.onDisconnect().remove()
+    else
+      if userRef != ""
+        userRef.remove()
+        userRef = ""
 
 
-Template.onlineUsers.onlineUserList = ->
+Template.onlineUsers.destroyed = ->
+  if Meteor.user()
+    company = Companies.findOne({ _id: Session.get "companyPage" })
+    userRef = new Firebase("https://hackerville.firebaseIO.com/room/#{company._id}/#{Meteor.user()._id}")
+    userRef.remove()
 
