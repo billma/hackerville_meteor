@@ -8,21 +8,24 @@ Template.loginButton.events
   "click #loginButton": (e)->
     target = $(e.target)
     if target.text() == "signout"
+      user = Meteor.user()
       Meteor.logout ->
         target.text("Login With Facebook")
-        console.log userRef
-        if userRef
+        companyId = Session.get "companyPage"
+        if companyId
+          userRef = new Firebase("https://hackerville.firebaseIO.com/room/#{companyId}/#{user._id}")
           userRef.remove()
-          userRef = ""
         return
       return
     Meteor.loginWithFacebook {}, (err) ->
       target.text("signout")
-      console.log Session.get "companyPage"
-      if Session.get "companyPage" and Meteor.user()
-        console.log "User present in chat"
-        console.log Meteor.user()
-        userRef = new Firebase("https://hackerville.firebaseIO.com/room/#{company._id}/#{Meteor.user()._id}")
+      companyId = Session.get "companyPage"
+      console.log "User present in chat"
+      console.log Meteor.user()
+      console.log companyId
+      if companyId and Meteor.user()
+        console.log "setting new user"
+        userRef = new Firebase("https://hackerville.firebaseIO.com/room/#{companyId}/#{Meteor.user()._id}")
         userRef.set {points: Meteor.user().profile.points, name: Meteor.user().profile.name, picture: Meteor.user().profile.picture }
         userRef.onDisconnect().remove()
     return
@@ -57,9 +60,33 @@ Template.chatPage.events
         "voters": []
       $(e.target).val("")
 
-userRef = ""
+window.myUsers = {}
+
+showUsers = () ->
+  console.log "displaying users"
+  $("#onlineUsersContainer").html ""
+  for k,v of window.myUsers
+    html = """ 
+      <div>
+        <img src="#{v.picture}" alt="" />
+        #{v.points}: #{v.name}
+      </div>
+      <hr />
+    """
+    $("#onlineUsersContainer").append html
+window.showUsers = showUsers
+
+valueChangedOnline = (snap) ->
+  window.myUsers = snap.val()
+  showUsers()
+  return
 
 
+Deps.autorun ->
+  showUsers()
+
+Template.onlineUsers.rendered = ->
+  showUsers()
 Template.onlineUsers.created = ->
   company = Companies.findOne({ _id: Session.get "companyPage" })
   onlineUserRef = new Firebase("https://hackerville.firebaseIO.com/room/#{company._id}")
@@ -67,22 +94,13 @@ Template.onlineUsers.created = ->
     userRef = new Firebase("https://hackerville.firebaseIO.com/room/#{company._id}/#{Meteor.user()._id}")
     userRef.set {points: Meteor.user().profile.points, name: Meteor.user().profile.name, picture: Meteor.user().profile.picture }
     userRef.onDisconnect().remove()
-
-  onlineUserRef.on 'value', (snap) ->
-    users = snap.val()
-    if !users
-      return
-    $("#onlineUsersContainer").html ""
-    for k,v of users
-      onlineUserTemplate = "onlineUser"
-      fragment = Meteor.render ->
-        Template[ onlineUserTemplate ](v)
-      $("#onlineUsersContainer").append fragment
-      console.log fragment
+  onlineUserRef.on 'value', valueChangedOnline
 
 Template.onlineUsers.destroyed = ->
+  onlineUserRef = new Firebase("https://hackerville.firebaseIO.com/room/#{Session.get 'previousPage'}")
+  onlineUserRef.off 'value', valueChangedOnline
   if Meteor.user()
-    company = Companies.findOne({ _id: Session.get "companyPage" })
+    company = Companies.findOne({ _id: Session.get "previousPage" })
     userRef = new Firebase("https://hackerville.firebaseIO.com/room/#{company._id}/#{Meteor.user()._id}")
     userRef.remove()
 
