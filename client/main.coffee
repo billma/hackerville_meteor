@@ -30,8 +30,27 @@ Template.chatPage.events
 Template.onlineUsers.created = ->
   company = Companies.findOne({ _id: Session.get "companyPage" })
   onlineUserRef = new Firebase("https://hackerville.firebaseIO.com/room/#{company._id}")
+  if Meteor.user()
+    console.log "user is alive"
+    userRef = new Firebase("https://hackerville.firebaseIO.com/room/#{company._id}/#{Meteor.user()._id}")
+    userRef.set {points: Meteor.user().profile.points, name: Meteor.user().profile.name, picture: Meteor.user().profile.picture }
+    userRef.onDisconnect().remove()
+
   onlineUserRef.on 'value', (snap) ->
-    console.log snap.val()
-  console.log "whf"
-  console.log company
+    users = snap.val()
+    if !users
+      return
+    window.users = users
+    $("#onlineUsersContainer").html ""
+    for k,v of users
+      onlineUserTemplate = "onlineUser"
+      fragment = Meteor.render ->
+        Template[ onlineUserTemplate ](v)
+      $("#onlineUsersContainer").append fragment
+      console.log fragment
+      console.log v.name
+      console.log v.picture
+
+
+Template.onlineUsers.onlineUserList = ->
 
