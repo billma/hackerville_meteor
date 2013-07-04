@@ -8,6 +8,6 @@ Meteor.Router.add
     to: "chatPage"
     and: (id) ->
       Session.set 'companyPage', id
-      #setInterval ()->
-      #  $("abbr.timeago").timeago()
-      #, 1000
+      Session.set 'previousPage', id
+      onlineUserRef = new Firebase("https://hackerville.firebaseIO.com/room/#{id}")
+      console.log "ROUTING TO #{id}"
