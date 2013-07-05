@@ -10,3 +10,4 @@ coffeescript
 router
 accounts-facebook
 accounts-ui
+scss
