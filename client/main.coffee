@@ -82,11 +82,10 @@ showUsers = () ->
   $("#onlineUsersContainer").html ""
   for k,v of window.myUsers
     html = """ 
-      <div>
-        <img src="#{v.picture}" alt="" />
-        #{v.points}: #{v.name}
+      <div class="user online">
+        <img src="#{v.picture}" alt="" class="img-circle" />
+        #{v.name} - #{v.points}
       </div>
-      <hr />
     """
     $("#onlineUsersContainer").append html
 window.showUsers = showUsers
