@@ -6,6 +6,8 @@ if Companies.find().count() == 0
     createdAt: new Date().getTime()
     employees:[]
     topUsers: []
+    pending: false
+    website: "http://www.tokbox.com"
   Companies.insert
     name: "FireBase"
     description: "A live database as a service"
@@ -13,6 +15,8 @@ if Companies.find().count() == 0
     createdAt: new Date().getTime()
     employees:[]
     topUsers: []
+    pending: false 
+    website: "http://www.firebase.com"
   Companies.insert
     name: "Dropbox"
     description: "Provides a data store for all your files!"
@@ -20,6 +24,8 @@ if Companies.find().count() == 0
     createdAt: new Date().getTime()
     employees:[]
     topUsers: []
+    pending: false
+    website: "http://www.dropbox.com"
   Companies.insert
     name: "Pusher"
     description: "A live date pushing service"
@@ -27,3 +33,5 @@ if Companies.find().count() == 0
     createdAt: new Date().getTime()
     employees:[]
     topUsers: []
+    pending: false
+    website: "http://pusher.com"
