@@ -1,0 +1,43 @@
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <script type='text/javascript' src='https://cdn.firebase.com/v0/firebase.js'></script>
+  <script type="text/javascript" src='/timeago.js' ></script>
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css" />
+</head>
+<body>
+  <div id="header">
+    <div class="container">
+      <div class="row">
+        <div class="span10">
+          {{> headerContent}}
+        </div>
+        <div class="span2">
+          {{> loginButton}}
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="main">
+    <div class="container">
+      {{renderPage}}
+    </div>
+  </div>
+  <div id="footer">
+    {{>footerContent}}
+  </div>
+</body>
+
+<template name="loginButton">
+<div id="loginButton">{{buttonText}}</div>
+</template>
+
+<template name="headerContent">
+<div id="companyTitle" class="section">HackerVille</div>
+<div id="companyDescription" class="section">A Community for Developers</div>
+</template>
+
+<template name="footerContent">
+<div id="footerInformation">Questions? <a id="contactUs">Contact Us</a></div>
+</template>

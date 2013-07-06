@@ -1,0 +1,78 @@
+$mc-dark: #002836;
+$mc-medium: #003a4f;
+$mc-light: #596b71;
+
+$border-grey: #DDD;
+$border-blue: #ddeaf8;
+$medium-grey: #CCC;
+$light-grey: #EEE;
+$dark-grey: #AAA;
+$darker-grey: #444;
+
+$dark-red: #c71c28;
+
+$online-green: #8dc73f;
+$away-orange: #f7941d;
+
+$header-dark: #383838;
+$header-white: #f2f2f2;
+$header-teal: #3ED1D6;
+
+@font-face{
+  font-family:avg;
+  src:url('/fonts/AvantGarITCbyBTExtLig.ttf');
+}
+
+body{
+  background:$mc-dark;
+}
+#header{
+  background:$header-dark;
+  position:relative;
+  font-family:"avg", arial;
+  color: $header-teal;
+  line-height:100%;
+  font-size:30px;
+  .section{
+    padding-top: 25px;
+    padding-bottom: 25px;
+    display:inline-block;
+  }
+  #companyTitle{
+    font-size:50px;
+    color: $header-white;
+    line-height:100%;
+    cursor:pointer;
+  }
+  #companyDescription{
+    margin-left:20px;
+    font-size:20px;
+  }
+  #loginButton{
+    color: $header-white;
+    padding-top: 35px;
+    cursor:pointer;
+  }
+}
+
+#main{
+  font-family:"avg", arial;
+}
+
+#footer{
+  background:$header-dark;
+  font-family:"avg", arial;
+  #footerInformation{
+    font-size:30px;
+    color: $header-white;
+    line-height:100%;
+    text-align:center;
+    padding-top: 25px;
+    padding-bottom: 25px;
+    #contactUs{
+      color: $header-teal;
+      cursor:pointer;
+    }
+  }
+}
+
