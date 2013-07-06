@@ -3,6 +3,10 @@ Meteor.Router.add
     to: 'index'
     and: () ->
       Session.set 'companyPage', ""
+  '/company/suggest':
+    to: 'suggestCompanyForm'
+  '/admin/approvecompany':
+    to: 'pendingCompanies'
   '/room': 'rooms'
   "/rooms/:_id":
     to: "chatPage"

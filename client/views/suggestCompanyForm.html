@@ -1,0 +1,47 @@
+<template name="suggestCompanyForm" >
+<div class="form-horizontal">
+  <div class="control-group">
+    <label class="control-label" for="companyName">Company Name</label>
+    <div class="controls">
+      <input type="text" id="companyName">
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="control-label" for="companyPic">Image URL</label>
+    <div class="controls">
+      <input type="text" id="companyPic">
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="control-label" for="companyWebsite">Website</label>
+    <div class="controls">
+      <input type="text" id="companyWebsite">
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="control-label" for="companyDescription">Description</label>
+    <div class="controls">
+      <textarea id="companyDescription" row="3" ></textarea>
+      <span class="help-inline"></span>
+    </div>
+  </div>
+  <div class="control-group">
+    <div class="controls">
+      <button id="createNewCompany" class="btn">Submit</button>
+    </div>
+  </div>
+</div>
+
+</template>
+
+
+<template name="pendingCompanies">
+  {{#each companies}}
+    {{name}}
+    {{website}}
+    {{createdAt}}
+    {{description}}
+    <img src="{{image}}" alt="" />
+    <hr/>
+  {{/each}}
+</template>
