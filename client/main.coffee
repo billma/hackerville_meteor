@@ -53,7 +53,7 @@ Template.chatPage.helpers
   current: ->
     return Meteor.user()
   messages: ->
-    return Messages.find({ companyId: Session.get "companyPage" }, {sort: {createdAt: -1}})
+    return Messages.find({ companyId: Session.get "companyPage" }, {sort: {createdAt: 1}})
   disableVote: ->
     if !Meteor.user() or _.contains( @voters, Meteor.user()._id )
       return "disabled"
@@ -65,15 +65,21 @@ Template.chatPage.events
     Messages.update({_id: this._id}, {$set: {votes: @votes+1, voters: @voters}})
   "keydown #write-chat": (e) ->
     if e.keyCode == 13
-      Messages.insert
-        "message": $(e.target).val()
-        "companyId": Session.get "companyPage"
-        "createdAt": ISODateString(new Date())
-        "userId": Meteor.user()._id
-        "name": Meteor.user().profile.name
-        "votes": 0
-        "voters": []
-      $(e.target).val("")
+      if $(e.target).val().replace(/\s+/g, "").length > 0
+        Messages.insert
+          "message": $(e.target).val()
+          "companyId": Session.get "companyPage"
+          "createdAt": ISODateString(new Date())
+          "userId": Meteor.user()._id
+          "name": Meteor.user().profile.name
+          "votes": 0
+          "voters": []
+        $(e.target).val("")
+      else
+        $(e.target).val("")
+
+Template.chatPage.rendered = ->
+  $("#messages")[0].scrollTop = $("#messages")[0].scrollHeight
 
 window.myUsers = {}
 
