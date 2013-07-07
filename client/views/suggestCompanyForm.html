@@ -40,16 +40,43 @@
   {{#each companies}}
     <tr>
       <td>
-        <img src="{{image}}" alt="" />
+        <img width="200" height="300" src="{{image}}" alt="" />
       </td>
       <td>
         <p>{{name}}</p>
-        <p><a href="{{website}}"></a>{{website}}</p>
+        <p><a href="{{website}}">{{website}}</a></p>
         <p>{{printTime}}</p>
         <p>{{description}}</p>
       </td>
       <td>
+        {{#with this}}
         <button class="btn btn-primary approveCompany">Approve</button>
+        {{/with}}
+      </td>
+    </tr>
+  {{/each}}
+</table>
+{{> currentCompanies}}
+</template>
+
+<template name="currentCompanies">
+<h3>Active Companies</h3>
+<table class="table table-bordered">
+  {{#each activeCompanies}}
+    <tr>
+      <td>
+        <img width="200" height="300" src="{{image}}" alt="" />
+      </td>
+      <td>
+        <p>{{name}}</p>
+        <p><a href="{{website}}">{{website}}</a></p>
+        <p>{{printTime}}</p>
+        <p>{{description}}</p>
+      </td>
+      <td>
+        {{#with this}}
+        <button class="btn btn-primary deleteCompany">Delete</button>
+        {{/with}}
       </td>
     </tr>
   {{/each}}
