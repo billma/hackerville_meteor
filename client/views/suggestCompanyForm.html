@@ -36,8 +36,9 @@
 
 
 <template name="pendingCompanies">
-<table class="table table-bordered">
-  {{#each companies}}
+<div class="container">
+  <table class="table table-bordered">
+    {{#each companies}}
     <tr>
       <td>
         <img width="200" height="300" src="{{image}}" alt="" />
@@ -51,13 +52,55 @@
       <td>
         {{#with this}}
         <button class="btn btn-primary approveCompany">Approve</button>
-        <button class="btn btn-primary deleteCompany">Delete</button>
+        <button class="btn btn-danger deleteCompany">Delete</button>
+        <a href="" role="button" class="btn editCompany" data-toggle="modal">Edit</a>
         {{/with}}
       </td>
     </tr>
-  {{/each}}
-</table>
-{{> currentCompanies}}
+    {{/each}}
+  </table>
+  {{> currentCompanies}}
+
+  <!-- Modal HTML -->
+  <div id="editModal" class="modal hide fade" >
+    <div class="modal-header">
+      <h3>Edit Company</h3>
+    </div>
+    <div class="modal-body">
+      <div class="form-horizontal">
+    <div class="control-group">
+      <label class="control-label" for="companyName">Company Name</label>
+      <div class="controls">
+        <input type="text" id="cName">
+      </div>
+    </div>
+    <div class="control-group">
+      <label class="control-label" for="companyPic">Image URL</label>
+      <div class="controls">
+        <input type="text" id="cPic">
+      </div>
+    </div>
+    <div class="control-group">
+      <label class="control-label" for="companyWebsite">Website</label>
+      <div class="controls">
+        <input type="text" id="cWebsite">
+      </div>
+    </div>
+    <div class="control-group">
+      <label class="control-label" for="companyDescription">Description</label>
+      <div class="controls">
+        <textarea id="cDescription" row="3" ></textarea>
+        <span class="help-inline"></span>
+      </div>
+    </div>
+    <input type="hidden" id="cId" />
+    <div class="modal-footer">
+      <a href="#" data-dismiss="modal" class="btn">Close</a>
+      <a href="#" class="btn btn-primary" id="saveChanges">Save changes</a>
+    </div>
+  </div>
+
+</div> 
 </template>
 
 <template name="currentCompanies">
@@ -76,10 +119,13 @@
       </td>
       <td>
         {{#with this}}
-        <button class="btn btn-primary deleteCompany">Delete</button>
+          <button class="btn btn-danger deleteCompany">Delete</button>
+          <a href="" role="button" class="btn editCompany" data-toggle="modal">Edit</a>
         {{/with}}
       </td>
     </tr>
   {{/each}}
 </table>
 </template>
+
+
