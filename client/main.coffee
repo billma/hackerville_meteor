@@ -1,4 +1,4 @@
 Template.index.companies = ->
-  return Companies.find({})
+  return Companies.find({pending: false})
 
 
