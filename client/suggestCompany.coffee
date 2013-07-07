@@ -22,6 +22,11 @@ Template.pendingCompanies.events
   "click .approveCompany": (e) ->
     console.log this._id
     Companies.update({_id: this._id}, {$set: { pending: false }})
+  "click .deleteCompany": ->
+    response = confirm("Are you sure you want to delete it?")
+    if response
+      Companies.remove({_id: this._id})
+    return
 
 Template.currentCompanies.activeCompanies = ->
   return Companies.find({pending: false})
@@ -30,6 +35,3 @@ Template.currentCompanies.helpers
   "printTime": ->
     return new Date(this.createdAt)
 
-Template.currentCompanies.events
-  "click .deleteCompany": ->
-    Companies.remove({_id: this._id})
