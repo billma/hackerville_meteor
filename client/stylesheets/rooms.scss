@@ -1,126 +1,27 @@
 @import "layout.scss";
 
+$rightBarWidth: 220px;
+
 #rooms{
-  .left,.middle,.right{
-    position: relative;
-    float: left;
-    height: 100%;
-  }
-  .left{
-    width: 15%;
-  }
-  .right{
-    width: 20%;
-  }
-  .middle{
-    width: 65%;
-  }
 }
 
-#rooms-top{
-  height: 50px;
-  #tabs{
-    width: 65%;
-    height: 100%;
-    margin-left: 15%;
-    .tab{
-      position:relative;
-      bottom: -14px;
-      width: 18%;
-      height: 70%;
-      border: 1px solid $border-grey;
-      float:left;
-      background: $light-grey;
-      border-top-left-radius: 3px;
-      border-top-right-radius: 3px;
-      line-height: 3em;
-      p{
-        position:relative;
-        left: - 5px;
-        width: 90%;
-        height: 100%;
-        margin: 0 auto;
-        color: $mc-light;
-        font-weight: bold;
-        text-align: center;
-        overflow:hidden;
-      }
-      .close{
-        position: absolute;
-        right: 0;
-        top: 0;
-        border-radius: 3px;
-        width: 40px;
-        height: 100%;
-        text-align: center;
-        background: -webkit-gradient(linear, left top, right top, 
-        color-stop(0%,rgba(238, 238, 238,0)), 
-        color-stop(15%, rgba(238, 238, 238,1)),
-        color-stop(100%,rgba(238, 238, 238,1)));
-        color: $medium-grey;
-        font-size: 20px;
-      }
-    }
-    .active-tab{
-      bottom: -6px;
-      height: 85%;
-      border-bottom: 1px solid white;
-      z-index: 101;
-      background: white;
-      box-shadow: 0 -2px 3px $dark-grey;
-      p{
-        color: $mc-medium !important;
-      }
-      .close{
-        background: -webkit-gradient(linear, left top, right top, 
-        color-stop(0%,rgba(255, 255, 255,0)), 
-        color-stop(15%, rgba(255, 255, 255,1)),
-        color-stop(100%,rgba(255, 255, 255,1))) !important;
-      }
-      
-    }
-    .tab:hover:after{
-      color: $darker-grey;
-    }
-    .tab:hover {
-      cursor: pointer;
-    }
-    .tab:after :hover{
-      color: $medium-grey;
-    }
-    #new-tab{
-      position: relative;
-      bottom: -20px;
-      float: left;
-      border: 1px solid $border-grey;
-      padding: 1px 8px;
-      margin-left: 5px;
-      border-radius: 3px;
-      font-weight: bold;
-      background: $light-grey;
-    }
-    #new-tab:before{
-      content: "+";
-      display: block;
-    }
-  }
-
-}
 #rooms-center{
-  height: 470px;
-  border-top: 1px solid $border-grey;
-  border-bottom: 1px solid $border-grey;
   #messages{
     overflow: auto;
+    position:fixed;
+    left: 0px;
+    right:$rightBarWidth;
+    top: $header-height;
+    bottom:80px;
+    border-bottom: 1px solid $border-grey;
   }
   .left{
-    width: 80%;
     .message{
       color: $mc-light;
-      width: 100%;
       margin: 10px 0;
       font-size: 18px;
       border-bottom: 1px dotted $light-grey;
+      word-wrap: break-word;
     }
     .message:after{
       display: block;
@@ -177,15 +78,37 @@
   }
 
   .right{
+    width:$rightBarWidth;
+    position:fixed;
+    top: $header-height;
+    right: 0px;
+    bottom:0;
     #company{
-      background: $light-grey;
       width: 100%;
-      height: 30%;
+      height: 175px;
+      text-align:center;
+      font-family:"avg", arial;
+      padding-bottom:10px;
+      padding-top:10px;
+      #companyInfo{
+        font-size: 40px;
+        color: $header-dark;
+        line-height:100%;
+      }
+      #companyDescription{
+        padding-top:10px;
+        font-size: 20px;
+        color: $lightDark;
+        line-height:100%;
+      }
+      #companyResources{
+        padding-top:10px;
+      }
     }
     #friends-lists{
       position: relative;
       width: 100%;
-      height: 70%;
+      height: 100%;
       h5{
         width: 100%;
         border-bottom: 1px solid $border-blue;
@@ -248,10 +171,17 @@
 }
 
 #rooms-bottom{
-  height: 80px;
-  .middle{
-    margin-top: 5px;
-    text-align: center;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  text-align: center;
+  position:fixed;
+  bottom: 10px;
+  left:0px;
+  right:$rightBarWidth;
+  #chatInputContainer{
+    min-width: 200px;
+    height:60px;
+    overflow-x:auto;
   }
   #profile-icon{
     width: 50px;
@@ -259,14 +189,14 @@
   } 
   #write-chat{
     height: 50px;
-    width: 75%;
+    width: 50%;
     border-radius: 0;
     margin: 0;
     resize: none;
   }
   #send-chat{
     display: inline-block;
-    width: 5%;
+    width: 50px;
     border: 1px solid $border-grey;
     height: 50px;
     padding: 4px;

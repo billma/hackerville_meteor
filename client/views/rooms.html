@@ -1,6 +1,7 @@
 <template name="chatPage">
   {{#with companyInfo}}
     <div id="rooms">
+
       <div id="rooms-top">
         <div id="tabs">
           <div class="tab active-tab">
@@ -12,6 +13,7 @@
           <div id="new-tab"></div>
         </div>
       </div>
+
       <div id="rooms-center">
         <div id= "messages" class="left">
           {{#each messages}}
@@ -35,8 +37,23 @@
           </div>
           {{/each}}
         </div>
+
+        <div id="rooms-bottom">
+          {{#if currentUser}}
+          {{#with current}}
+          <div id="chatInputContainer">
+            <img id="profile-icon" src="{{profile.picture}}" alt="" class="img-polaroid" />
+            <textarea id="write-chat" name="" rows="10" cols="30"></textarea>
+            <span id="send-chat">Send</span>
+          </div>
+          {{/with}}
+          {{/if}}
+        </div>
+
         <div class="right">
-          <div id="company"></div>
+          <div id="company">
+            {{> infoContainer}}
+          </div>
           <div id="friends-lists">
             <h5>Current Users (20)</h5>
             <div class="list">
@@ -45,21 +62,23 @@
           </div>
         </div>
       </div>
-      <div id="rooms-bottom">
-        <div class="left"></div>
-        <div class="middle">
-          {{#if currentUser}}
-            {{#with current}}
-              <img id="profile-icon" src="{{profile.picture}}" alt="" class="img-polaroid" />
-              <textarea id="write-chat" name="" rows="10" cols="30"></textarea>
-              <span id="send-chat">Send</span>
-            {{/with}}
-          {{/if}}
-        </div>
-        <div class="right"></div>
-      </div>
+
+
     </div>
   {{/with}}
 </template>
 
 
+<template name="infoContainer">
+<div id="companyInfo">
+  <div id="companyName">
+    {{name}}
+  </div>
+  <div id="companyDescription">
+    {{description}}
+  </div>
+  <div id="companyResources">
+    <button class="btn btn-large">Resources</button>
+  </div>
+</div>
+</template>

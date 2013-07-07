@@ -18,6 +18,9 @@ $header-dark: #383838;
 $lightDark: #D4D4D4;
 $header-white: #f2f2f2;
 $header-teal: #3ED1D6;
+$header-pad: 25px;
+$header-size: 50px;
+$header-height: 2*$header-pad+$header-size+2px;
 
 @font-face{
   font-family:avg;
@@ -35,12 +38,12 @@ body{
   line-height:100%;
   font-size:30px;
   .section{
-    padding-top: 25px;
-    padding-bottom: 25px;
+    padding-top: $header-pad;
+    padding-bottom: $header-pad;
     display:inline-block;
   }
   #companyTitle{
-    font-size:50px;
+    font-size:$header-size;
     color: $header-white;
     line-height:100%;
     cursor:pointer;
@@ -53,27 +56,6 @@ body{
     color: $header-white;
     padding-top: 35px;
     cursor:pointer;
-  }
-}
-
-#main{
-  font-family:"avg", arial;
-}
-
-#footer{
-  background:$header-dark;
-  font-family:"avg", arial;
-  #footerInformation{
-    font-size:30px;
-    color: $header-white;
-    line-height:100%;
-    text-align:center;
-    padding-top: 25px;
-    padding-bottom: 25px;
-    #contactUs{
-      color: $header-teal;
-      cursor:pointer;
-    }
   }
 }
 

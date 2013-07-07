@@ -1,6 +1,7 @@
 @import "layout.scss";
 
 #roomListContainer{
+  font-family:"avg", arial;
   color: $header-dark;
   padding-top: 30px;
   padding-bottom: 30px;
@@ -29,6 +30,22 @@
     }
     &:hover{
       background:#F2F2F2;
+    }
+  }
+}
+#footer{
+  background:$header-dark;
+  font-family:"avg", arial;
+  #footerInformation{
+    font-size:30px;
+    color: $header-white;
+    line-height:100%;
+    text-align:center;
+    padding-top: 25px;
+    padding-bottom: 25px;
+    #contactUs{
+      color: $header-teal;
+      cursor:pointer;
     }
   }
 }
