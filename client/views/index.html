@@ -6,18 +6,16 @@
   <hr class="sectionDivider" />
   <div class="container">
     {{#each companies }}
-    <div class="row">
+    <div class="row roomContainer">
       <a href="{{chatPagePath this}}">
-        <div class="roomContainer">
-          <div class="span9 offset1">
-            <span class="roomName">{{name}}</span>
-            <span class="roomDescription">{{description}}</span>
-          </div>
-          <div class="span2">
-            <div class="usersCount">
-              <span class="icon-user"></span>
-              50
-            </div>
+        <div class="span9 offset1">
+          <span class="roomName">{{name}}</span>
+          <span class="roomDescription">{{description}}</span>
+        </div>
+        <div class="span2">
+          <div class="usersCount">
+            <span class="icon-user"></span>
+            50
           </div>
         </div>
       </a>

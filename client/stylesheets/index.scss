@@ -27,8 +27,8 @@
       font-size:30px;
       line-height:100%;
     }
-  }
-  .row:hover{
-    background:#F2F2F2;
+    &:hover{
+      background:#F2F2F2;
+    }
   }
 }
