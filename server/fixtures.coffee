@@ -15,7 +15,7 @@ if Companies.find().count() == 0
     createdAt: new Date().getTime()
     employees:[]
     topUsers: []
-    pending: false 
+    pending: false
     website: "http://www.firebase.com"
   Companies.insert
     name: "Dropbox"
