@@ -27,6 +27,17 @@ Template.pendingCompanies.events
     if response
       Companies.remove({_id: this._id})
     return
+  "click .editCompany": ->
+    $("#cName").val( this.name )
+    $("#cPic").val( this.image )
+    $("#cWebsite").val( this.website )
+    $("#cDescription").text( this.description )
+    $("#cId").val( this._id )
+    $("#editModal").modal({keyboard: true})
+  "click #saveChanges": ->
+    Companies.update({_id: $("#cId").val() }, {$set: { name: $("#cName").val(), website: $("#cWebsite").val(), image: $("#cPic").val(), createdAt: new Date().getTime(), description: $("#cDescription").val() }})
+    $("#editModal").modal('hide')
+
 
 Template.currentCompanies.activeCompanies = ->
   return Companies.find({pending: false})
@@ -34,4 +45,5 @@ Template.currentCompanies.activeCompanies = ->
 Template.currentCompanies.helpers
   "printTime": ->
     return new Date(this.createdAt)
+
 
