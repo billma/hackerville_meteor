@@ -36,12 +36,22 @@
 
 
 <template name="pendingCompanies">
+<table class="table table-bordered">
   {{#each companies}}
-    {{name}}
-    {{website}}
-    {{createdAt}}
-    {{description}}
-    <img src="{{image}}" alt="" />
-    <hr/>
+    <tr>
+      <td>
+        <img src="{{image}}" alt="" />
+      </td>
+      <td>
+        <p>{{name}}</p>
+        <p><a href="{{website}}"></a>{{website}}</p>
+        <p>{{printTime}}</p>
+        <p>{{description}}</p>
+      </td>
+      <td>
+        <button class="btn btn-primary approveCompany">Approve</button>
+      </td>
+    </tr>
   {{/each}}
+</table>
 </template>
