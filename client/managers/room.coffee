@@ -51,50 +51,29 @@ window.app.userScrollTop = 0
 
 Template.chatPage.rendered = ->
   if window.app.userScrollTop >= (window.app.renderedScrollTop-30) || window.app.userScrollTop == 0
-    $("#messages")[0].scrollTop = $("#messages")[0].scrollHeight
-    window.app.renderedScrollTop = $("#messages")[0].scrollTop
+    if $("#messages")[0]
+      $("#messages")[0].scrollTop = $("#messages")[0].scrollHeight
+      window.app.renderedScrollTop = $("#messages")[0].scrollTop
 
-window.myUsers = {}
+Meteor.Presence.state = ->
+  a =
+    online: true
+    currentRoomId: Session.get('companyPage')
+  return a
 
-showUsers = () ->
-  console.log "displaying users"
-  $("#onlineUsersContainer").html ""
-  for k,v of window.myUsers
-    html = """ 
-      <div class="user online">
-        <img src="#{v.picture}" alt="" class="img-circle" />
-        #{v.name} - #{v.points}
-      </div>
-    """
-    $("#onlineUsersContainer").append html
-window.showUsers = showUsers
+Template.userTemplate.helpers
+   userData: ->
+     Meteor.users.findOne({_id:@userId})
 
-valueChangedOnline = (snap) ->
-  window.myUsers = snap.val()
-  showUsers()
-  return
-
-
-Deps.autorun ->
-  showUsers()
-
-Template.onlineUsers.rendered = ->
-  showUsers()
-Template.onlineUsers.created = ->
-  company = Companies.findOne({ _id: Session.get "companyPage" })
-  onlineUserRef = new Firebase("https://hackerville.firebaseIO.com/room/#{company._id}")
-  if Meteor.user()
-    userRef = new Firebase("https://hackerville.firebaseIO.com/room/#{company._id}/#{Meteor.user()._id}")
-    userRef.set {points: Meteor.user().profile.points, name: Meteor.user().profile.name, picture: Meteor.user().profile.picture }
-    userRef.onDisconnect().remove()
-  onlineUserRef.on 'value', valueChangedOnline
-
-Template.onlineUsers.destroyed = ->
-  onlineUserRef = new Firebase("https://hackerville.firebaseIO.com/room/#{Session.get 'previousPage'}")
-  onlineUserRef.off 'value', valueChangedOnline
-  if Meteor.user()
-    company = Companies.findOne({ _id: Session.get "previousPage" })
-    userRef = new Firebase("https://hackerville.firebaseIO.com/room/#{company._id}/#{Meteor.user()._id}")
-    userRef.remove()
-
+Template.onlineUsersTemplate.userPresences = ->
+  users = Meteor.presences.find {"state.currentRoomId": Session.get('companyPage')},
+    transform: (doc) ->
+      user = Meteor.users.findOne({_id:doc.userId})
+      if(user)
+        doc.profile = user.profile
+      return doc
+    fields: {state: true, userId: true}
+  distinct = users.distinct "userId"
+  $("#roomOnlineCounter").text(distinct.length)
+  return distinct
 

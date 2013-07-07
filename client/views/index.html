@@ -29,27 +29,6 @@
 </div>
 </template>
 
-<template name="chatPage-old">
-{{#with companyInfo}}
-<h1>Chat Page for {{name}}</h1>
-{{> onlineUsers}}
-{{/with}}
-
-
-{{#if currentUser}}
-<input id="messageInput" type="text" />
-{{/if}}
-<div id="messageContainer">
-  {{#each messages}}
-  <p><span class="btn vote {{disableVote}}" >{{votes}} <3</span>{{name}}: {{message}}</p>
-  {{/each}}
-</div>
-</template>
-
-<template name="onlineUsers">
-<div id="onlineUsersContainer"></div>
-</template>
-
 <template name="footerContent">
 <div id="footerInformation">Questions? <a id="contactUs">Contact Us</a></div>
 </template>

@@ -9,3 +9,11 @@ Accounts.loginServiceConfiguration.insert
   service: "facebook"
   appId: "187865891375322"
   secret: "794bc03179735a642abb22b3f596c912"
+
+
+
+Meteor.publish 'userPresence', ->
+  filter = {}
+  return Meteor.presences.find(filter, {fields: {state: true, userId: true}})
+
+

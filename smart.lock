@@ -7,7 +7,8 @@
   "dependencies": {
     "basePackages": {
       "router": {},
-      "scss": {}
+      "scss": {},
+      "presence": {}
     },
     "packages": {
       "router": {
@@ -19,6 +20,11 @@
         "git": "https://github.com/fourseven/meteor-scss.git",
         "tag": "v0.5.1.1",
         "commit": "6b142df6fc11f026e4bff1d6828055b3d84ce608"
+      },
+      "presence": {
+        "git": "https://github.com/tmeasday/meteor-presence.git",
+        "tag": "v0.2.0",
+        "commit": "cb103275ba67e524bf3a9cce4ff0b36f03959d1b"
       },
       "page-js-ie-support": {
         "git": "https://github.com/tmeasday/meteor-page-js-ie-support.git",

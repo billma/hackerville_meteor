@@ -11,3 +11,4 @@ router
 accounts-facebook
 accounts-ui
 scss
+presence

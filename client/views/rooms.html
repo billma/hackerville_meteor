@@ -55,14 +55,13 @@
             {{> infoContainer}}
           </div>
           <div id="friends-lists">
-            <h5>Current Users (20)</h5>
+            <h5>Current Users (<span id="roomOnlineCounter">20</span>)</h5>
             <div class="list">
-              {{> onlineUsers}}
+              {{> onlineUsersTemplate}}
             </div>
           </div>
         </div>
       </div>
-
 
     </div>
   {{/with}}
@@ -81,4 +80,21 @@
     <button class="btn btn-large">Resources</button>
   </div>
 </div>
+</template>
+
+<template name="onlineUsersTemplate">
+<div id="onlineUsersContainer">
+  {{#each userPresences}}
+  {{> userTemplate}}
+  {{/each}}
+</div>
+</template>
+
+<template name="userTemplate">
+{{#with userData}}
+<div class="user online">
+  <img src="{{profile.picture}}" alt="" class="img-circle" />
+  {{profile.name}} - {{profile.points}}
+</div>
+{{/with}}
 </template>
