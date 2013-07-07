@@ -1,8 +1,30 @@
 <template name="index">
-<h1>Companies</h1>
-  {{#each companies }}
-  <a href="{{chatPagePath this}}">{{name}}</a>
-  {{/each}}
+<div id="roomListContainer">
+  <div class="container">
+    <div id="sectionTitle">APIs</div>
+  </div>
+  <hr class="sectionDivider" />
+  <div class="container">
+    {{#each companies }}
+    <div class="row">
+      <a href="{{chatPagePath this}}">
+        <div class="roomContainer">
+          <div class="span9 offset1">
+            <span class="roomName">{{name}}</span>
+            <span class="roomDescription">{{description}}</span>
+          </div>
+          <div class="span2">
+            <div class="usersCount">
+              <span class="icon-user"></span>
+              50
+            </div>
+          </div>
+        </div>
+      </a>
+    </div>
+    {{/each}}
+  </div>
+</div>
 </template>
 
 <template name="chatPage-old">

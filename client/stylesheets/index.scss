@@ -1,0 +1,34 @@
+@import "layout.scss";
+
+#roomListContainer{
+  color: $header-dark;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  font-size:40px;
+  line-height:100%;
+  color: $header-dark;
+  .sectionDivider{
+    width:20%;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    border-color: $lightDark;
+  }
+  a{
+    color: $header-dark;
+  }
+  .roomContainer{
+    padding-top: 20px;
+    padding-bottom: 20px;
+    .roomName{
+      font-size:40px;
+    }
+    .roomDescription{
+      color: $lightDark;
+      font-size:30px;
+      line-height:100%;
+    }
+  }
+  .row:hover{
+    background:#F2F2F2;
+  }
+}
