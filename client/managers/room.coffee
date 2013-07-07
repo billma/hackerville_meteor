@@ -42,9 +42,17 @@ Template.chatPage.events
         $(e.target).val("")
       else
         $(e.target).val("")
+  "scroll #messages": (e)->
+    window.app.userScrollTop = e.target.scrollTop
+
+window.app = window.app || {}
+window.app.renderedScrollTop = 0
+window.app.userScrollTop = 0
 
 Template.chatPage.rendered = ->
-  $("#messages")[0].scrollTop = $("#messages")[0].scrollHeight
+  if window.app.userScrollTop >= (window.app.renderedScrollTop-30) || window.app.userScrollTop == 0
+    $("#messages")[0].scrollTop = $("#messages")[0].scrollHeight
+    window.app.renderedScrollTop = $("#messages")[0].scrollTop
 
 window.myUsers = {}
 
