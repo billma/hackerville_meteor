@@ -22,15 +22,6 @@ Template.loginButton.events
         return
       return
     Meteor.loginWithFacebook {}, (err) ->
-      target.text("signout")
-      companyId = Session.get "companyPage"
-      console.log "User present in chat"
-      console.log Meteor.user()
-      console.log companyId
-      if companyId and Meteor.user()
-        console.log "setting new user"
-        userRef = new Firebase("https://hackerville.firebaseIO.com/room/#{companyId}/#{Meteor.user()._id}")
-        userRef.set {points: Meteor.user().profile.points, name: Meteor.user().profile.name, picture: Meteor.user().profile.picture }
-        userRef.onDisconnect().remove()
+      console.log "Welcome! Thank you for logging in!"
     return
 
