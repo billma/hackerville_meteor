@@ -20,20 +20,23 @@ Template.chatPage.helpers
   messages: ->
     return Messages.find({ companyId: Session.get "companyPage" }, {sort: {createdAt: 1}})
   disableVote: ->
-    if !Meteor.user() or _.contains( @voters, Meteor.user()._id )
+    if !Meteor.user() or _.contains( @voters, Meteor.userId() ) or @userId == Meteor.userId()
       return "disabled"
     return "enabled"
 
 Template.chatPage.events
   "click .vote": (e) ->
+    if @userId == Meteor.userId()
+      return #user cant upvote himself
     index = @voters.indexOf Meteor.user()._id
     if index < 0
       @voters.push Meteor.user()._id
-      @votes += 1
+      newVote = @votes + 1
     else
       @voters.splice( index, 1 )
-      @votes -= 1
-    Messages.update({_id: this._id}, {$set: {votes: @votes, voters: @voters}})
+      newVote = @votes - 1
+    Meteor.call( "updateUserPoints", @userId, ( newVote - @votes ) )
+    Messages.update({_id: this._id}, {$set: {votes: newVote, voters: @voters}})
   "keydown #write-chat": (e) ->
     if e.keyCode == 13
       if $(e.target).val().replace(/\s+/g, "").length > 0

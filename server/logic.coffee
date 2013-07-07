@@ -17,3 +17,11 @@ Meteor.publish 'userPresence', ->
   return Meteor.presences.find(filter, {fields: {state: true, userId: true}})
 
 
+Meteor.methods
+  updateUserPoints: ( id, dir ) ->
+    origPoints = Meteor.users.findOne({_id: id}).profile.points
+    if dir == -1
+      Meteor.users.update({_id: id}, {$set: {"profile.points": origPoints-1 }})
+    if dir == 1
+      Meteor.users.update({_id: id}, {$set: {"profile.points": origPoints+1 }})
+      
