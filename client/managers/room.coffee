@@ -25,16 +25,22 @@ Template.chatPage.helpers
     return "enabled"
 
 Template.chatPage.events
-  "click .vote.enabled": (e) ->
-    @voters.push Meteor.user()._id
-    Messages.update({_id: this._id}, {$set: {votes: @votes+1, voters: @voters}})
+  "click .vote": (e) ->
+    index = @voters.indexOf Meteor.user()._id
+    if index < 0
+      @voters.push Meteor.user()._id
+      @votes += 1
+    else
+      @voters.splice( index, 1 )
+      @votes -= 1
+    Messages.update({_id: this._id}, {$set: {votes: @votes, voters: @voters}})
   "keydown #write-chat": (e) ->
     if e.keyCode == 13
       if $(e.target).val().replace(/\s+/g, "").length > 0
         Messages.insert
           "message": $(e.target).val()
           "companyId": Session.get "companyPage"
-          "createdAt": ISODateString(new Date())
+          "createdAt": Date.now()
           "userId": Meteor.user()._id
           "name": Meteor.user().profile.name
           "votes": 0
@@ -47,10 +53,10 @@ Template.chatPage.events
 
 window.app = window.app || {}
 window.app.renderedScrollTop = 0
-window.app.userScrollTop = 0
+window.app.userScrollTop = -1
 
 Template.chatPage.rendered = ->
-  if window.app.userScrollTop >= (window.app.renderedScrollTop-30) || window.app.userScrollTop == 0
+  if window.app.userScrollTop >= (window.app.renderedScrollTop-30) || window.app.userScrollTop < 0
     if $("#messages")[0]
       $("#messages")[0].scrollTop = $("#messages")[0].scrollHeight
       window.app.renderedScrollTop = $("#messages")[0].scrollTop
