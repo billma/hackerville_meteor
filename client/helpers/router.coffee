@@ -5,6 +5,16 @@ Meteor.Router.add
       Session.set 'companyPage', ""
   '/company/suggest':
     to: 'suggestCompanyForm'
+  '/profile/:_id':
+    to: 'userProfile'
+    and: (id) ->
+      console.log id
+      Session.set 'userId', id
+  '/profile/:_id/edit':
+    to: 'editUserProfile'
+    and: (id) ->
+      console.log id
+      Session.set 'userId', id
   '/admin/approvecompany':
     to: 'pendingCompanies'
   '/room': 'rooms'

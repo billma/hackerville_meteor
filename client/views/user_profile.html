@@ -1,0 +1,38 @@
+<template name="userProfile">
+  {{#if isProfileExist }}
+    <div id="userInfo">
+    {{#with user}}
+        <p>{{_id}}</p>
+        <p id="username">{{profile.name}}</p>
+        <img src="{{profile.picture}}" alt="{{profile.name}}" />
+        <p>Points: {{profile.points}}</p>
+        {{#if profile.description}}
+          <p id="userDescription">Description: {{profile.description}}</p>
+        {{else}}
+          {{#if isProfileBelongToCurUser }}
+          <p>Describe yourself? <a href="/profile/{{_id}}/edit"><button class="btn editUserProfileBtn">Add Description</button></a></p>
+          {{/if }}
+        {{/if }}
+    {{/with}}
+    {{#if isProfileBelongToCurUser }}
+      {{#with user}}
+        <a href="/profile/{{_id}}/edit"><button class="btn editUserProfileBtn">Edit Profile</button></a>
+      {{/with }}
+    {{/if }}
+    </div> 
+  {{else}}
+    <h5>The profile you are looking for doesn't exist</h5>
+  {{/if}}
+</template>
+
+<template name="editUserProfile">
+  <h2>Edit Profile</h2>
+  {{#if isProfileExist }}
+    {{#with user}}
+    <p>Description: <textarea id="editedUserDescription">{{#if profile.description}}{{profile.description}}{{/if}}</textarea></p>
+    {{/with}}
+    <button id="saveUserProfileBtn" class="btn">Save Changes</button>
+  {{else}}
+    <h5>The profile you are looking for doesn't exist</h5>
+  {{/if}}
+</template>
