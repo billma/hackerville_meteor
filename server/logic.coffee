@@ -2,6 +2,7 @@ Accounts.onCreateUser (options, user) ->
   options.profile.name = user.services.facebook.name
   options.profile.picture = "http://graph.facebook.com/" + user.services.facebook.id + "/picture?type=square"
   options.profile.points = 0
+  options.profile.description = null
   user.profile = options.profile
   return user
 
@@ -24,4 +25,7 @@ Meteor.methods
       Meteor.users.update({_id: id}, {$set: {"profile.points": origPoints-1 }})
     if dir == 1
       Meteor.users.update({_id: id}, {$set: {"profile.points": origPoints+1 }})
+  updateUserProfile: ( id, description ) ->
+    Meteor.users.update({_id: id }, {$set: {"profile.description": description }})
+    console.log Meteor.users.findOne({_id: id})
       
