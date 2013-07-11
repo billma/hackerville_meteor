@@ -5,29 +5,49 @@
   <script type="text/javascript" src='/bootstrap/js/bootstrap.min.js' ></script>
   <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css" />
   <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
 </head>
 <body>
-  <div id="header">
-    <div class="container">
-      <div class="row">
-        <div class="span10">
-          {{> headerContent}}
-        </div>
-        <div class="span2">
-          {{> loginButton}}
-        </div>
+  <div id="header" class="navbar navbar-fixed-top">
+      <div class="row-fluid">
+        {{> headerContent}}
+        {{> headerContentMobile}}
       </div>
-    </div>
   </div>
   {{renderPage}}
 </body>
 
-<template name="loginButton">
-  <div id="loginButton">{{buttonText}}</div>
+<template name="headerContent">
+<div class="headerContent hidden-phone">
+  {{#with currentUser}}
+  <div class="userDropdown span2 ">
+    <img src="{{profile.picture}}" alt="" class="img-rounded " />
+    <span >Menu <i class="icon-angle-down"></i></span>
+  </div>
+  {{/with}}
+  <div class="loginButton span2 "><i class={{buttonIcon}}></i>{{buttonText}}</div>
+  <div class="logo span4">HackerVille</div>
+  <div class="description span4 visible-desktop">A Community for Developers</div>
+</div>
 </template>
 
-<template name="headerContent">
-<div id="companyTitle" class="section">HackerVille</div>
-<div id="companyDescription" class="section">A Community for Developers</div>
+<template name="headerContentMobile">
+<div class="headerContentMobile visible-phone">
+  <span class="logo mobile">HV</span>
+  <span class="menu-mobile non-select">
+    <i class="icon-reorder"></i>
+  </span>
+  <ul class="menu-list hidden">
+    <li class="loginButton mobile">
+    <i class={{buttonIcon}}></i> 
+    {{buttonText}} 
+    </li>
+    <li>
+    <i class="icon-user"></i>
+    edit profile
+    </li>
+  </ul> 
+</div>
 </template>
 

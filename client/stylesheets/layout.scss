@@ -15,6 +15,7 @@ $online-green: #8dc73f;
 $away-orange: #f7941d;
 
 $header-dark: #383838;
+$header-dark-transparent: rgba(56,56,56,0.9);
 $lightDark: #D4D4D4;
 $header-white: #f2f2f2;
 $header-teal: #3ED1D6;
@@ -30,32 +31,87 @@ $header-height: 2*$header-pad+$header-size+2px;
 body{
   background:$mc-dark;
 }
+
+.non-select{
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: moz-none;
+  -ms-user-select: none;
+  user-select: none;
+}
 #header{
   background:$header-dark;
   position:relative;
   font-family:"avg", arial;
   color: $header-teal;
-  line-height:100%;
+  min-height: 90px;
   font-size:30px;
-  .section{
-    padding-top: $header-pad;
-    padding-bottom: $header-pad;
-    display:inline-block;
-  }
-  #companyTitle{
+  line-height: 3em;
+
+  .logo{
     font-size:$header-size;
     color: $header-white;
-    line-height:100%;
     cursor:pointer;
   }
-  #companyDescription{
-    margin-left:20px;
-    font-size:20px;
+  i{
+     margin: 0 5px;
   }
-  #loginButton{
+  .loginButton{
     color: $header-white;
-    padding-top: 35px;
     cursor:pointer;
+
   }
+
+  .headerContent{
+    text-align:center;
+    .loginButton,.userDropdown{
+     border-left: 1px solid $darker-grey;
+     min-width: 140px;
+     height: 100%;
+     font-size: 23px;
+     float: right;
+    }
+    .description{
+      margin-left:20px;
+      font-size:20px;
+    }
+    .userDropdown{
+      position: relative;
+      border-right: 1px solid $darker-grey;
+      .img-rounded{
+        width: 25px;
+      }
+      .icon-angle-down{
+        margin-top:8px;
+      }
+    }
+  }
+  .headerContentMobile{
+    .logo,.menu-mobile{
+      margin: 0 20px;
+    }
+    .menu-mobile{
+      float: right;
+      :hover{
+        cursor: pointer;
+      }
+    }
+    .loginButton{
+    }
+    .menu-list{
+      background: $header-dark-transparent;
+      position: fixed;
+      list-style: none;
+      margin:0;
+      width: 100%;
+      li{
+        text-align: center;
+        padding: 20px 0;
+        border-bottom:1px solid $header-dark;
+      }
+    }
+  }
+
 }
 
