@@ -14,40 +14,42 @@
       </div>
 
       <div id="rooms-center">
-        <div id= "messages" class="left">
-          {{#each messages}}
-          <div class="message">
-            <div class="time">
-              <abbr class="timeago" title="{{createdAt}}"></abbr>
-              <span class="name">
-                {{name}}
-              </span>
+        <div  class="left">
+          <div id="messages">
+            {{#each messages}}
+            <div class="message">
+              <div class="time">
+                <abbr class="timeago" title="{{createdAt}}"></abbr>
+                <span class="name">
+                  {{name}}
+                </span>
+              </div>
+              <div class="body">
+                <p>{{message}}</p>
+              </div>
+              <div class="rating">
+                <span class="vote {{disableVote}}" >
+                  <i class="icon-star-empty"></i>
+                  <i class="icon-star"></i>
+                  {{votes}} 
+                </span>
+              </div>
             </div>
-            <div class="body">
-              <p>{{message}}</p>
-            </div>
-            <div class="rating">
-              <span class="vote {{disableVote}}" >
-                <i class="icon-star-empty"></i>
-                <i class="icon-star"></i>
-                {{votes}} 
-              </span>
-            </div>
+            {{/each}}
           </div>
-          {{/each}}
+          <div id="chat-input">
+            {{#if currentUser}}
+            {{#with current}}
+            <div id="chatInputContainer">
+              <img id="profile-icon" src="{{profile.picture}}" alt="" class="img-polaroid" />
+              <textarea id="write-chat" name="" rows="10" cols="30"></textarea>
+              <span id="send-chat">Send</span>
+            </div>
+            {{/with}}
+            {{/if}}
+          </div>
         </div>
 
-        <div id="rooms-bottom">
-          {{#if currentUser}}
-          {{#with current}}
-          <div id="chatInputContainer">
-            <img id="profile-icon" src="{{profile.picture}}" alt="" class="img-polaroid" />
-            <textarea id="write-chat" name="" rows="10" cols="30"></textarea>
-            <span id="send-chat">Send</span>
-          </div>
-          {{/with}}
-          {{/if}}
-        </div>
 
         <div class="right">
           <div id="company">
@@ -60,12 +62,11 @@
             </div>
           </div>
         </div>
+        <div class="clear"></div>
       </div>
-
     </div>
   {{/with}}
 </template>
-
 
 <template name="infoContainer">
 <div id="companyInfo">

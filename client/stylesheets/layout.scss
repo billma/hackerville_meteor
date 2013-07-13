@@ -23,15 +23,21 @@ $header-pad: 25px;
 $header-size: 50px;
 $header-height: 2*$header-pad+$header-size+2px;
 
+
 @font-face{
   font-family:avg;
   src:url('/fonts/AvantGarITCbyBTExtLig.ttf');
 }
-
-body{
-  background:$mc-dark;
+html{
+  background-color: $header-dark !important;
 }
 
+.clear{
+  clear: both;
+}
+a, a:hover, a:active{
+  text-decoration: none !important;
+}
 .non-select{
   -webkit-touch-callout: none;
   -webkit-user-select: none;
@@ -40,6 +46,25 @@ body{
   -ms-user-select: none;
   user-select: none;
 }
+
+// 
+
+// phone 
+@media (max-width: 480px) {
+  .layout-container{
+    margin: 0 -20px;
+  }
+}
+// from phone to tablet
+@media (min-width: 480px) and (max-width: 767px){
+  .layout-container{
+    margin: 0 -20px;
+  }
+}
+// from tablet to desktop
+@media (min-width: 767px){
+}
+
 #header{
   background:$header-dark;
   position:relative;
@@ -48,6 +73,7 @@ body{
   min-height: 90px;
   font-size:30px;
   line-height: 3em;
+  z-index: 101;
 
   .logo{
     font-size:$header-size;
@@ -64,13 +90,13 @@ body{
   }
 
   .headerContent{
-    text-align:center;
     .loginButton,.userDropdown{
      border-left: 1px solid $darker-grey;
      min-width: 140px;
      height: 100%;
      font-size: 23px;
      float: right;
+     text-align: center;
     }
     .description{
       margin-left:20px;

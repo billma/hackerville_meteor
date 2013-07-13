@@ -1,88 +1,145 @@
 @import "layout.scss";
 
 $rightBarWidth: 220px;
+$roomHeight: 700px;
 
 #rooms{
+  position:fixed;
+  top:0; left:0;
+  width:100%;
+  height: 100%;
+  max-height: $roomHeight;
+  background: white;
+  &:before{
+    content:"";
+    display: block;
+    width: 100%;
+    height: 90px;
+    background: transparent;
+  }
 }
 
+
+
 #rooms-center{
-  #messages{
-    overflow: auto;
-    position:fixed;
-    left: 0px;
-    right:$rightBarWidth;
-    top: $header-height;
-    bottom:80px;
-    border-bottom: 1px solid $border-grey;
+  height: $roomHeight;
+  .left,.right{
+    float:left;
+    height: $roomHeight;
   }
   .left{
-    .message{
-      color: $mc-light;
-      margin: 10px 0;
-      font-size: 18px;
-      border-bottom: 1px dotted $light-grey;
-      word-wrap: break-word;
+    @media (min-width: 767px){
+      width: 80%;
+    } 
+    @media (max-width: 767px){
+      width: 100%;
     }
-    .message:after{
-      display: block;
-      content: "";
-      clear: both;
-    }
-    .rating,.body,.time{
-      display:block;
-      float:left;
-    }
-    .rating{
-      width: 12%;
-      height: 100%;
-      text-align: right;
-      .vote{
-        margin-right: 20px;
+    #messages{
+      height:500px;
+      overflow: auto;
+      border-bottom: 1px solid $border-grey;
+      .message{
+        color: $mc-light;
+        margin: 10px 0;
+        font-size: 18px;
+        border-bottom: 1px dotted $light-grey;
+        word-wrap: break-word;
       }
-      .disabled{
-        color: $medium-grey; 
-        .icon-star-empty{
-          display: none;
+      .message:after{
+        display: block;
+        content: "";
+        clear: both;
+      }
+      .rating,.body,.time{
+        display:block;
+        float:left;
+      }
+      .rating{
+        width: 12%;
+        height: 100%;
+        text-align: right;
+        .vote{
+          margin-right: 20px;
+        }
+        .disabled{
+          color: $medium-grey; 
+          .icon-star-empty{
+            display: none;
+          }
+        }
+        .enabled{
+          color: $medium-grey;
+          :hover{
+            color: $mc-light;
+            cursor: pointer;
+          } 
+          .icon-star{
+            display: none;
+          }
         }
       }
-      .enabled{
-        color: $medium-grey;
-        :hover{
-          color: $mc-light;
-          cursor: pointer;
-        } 
-        .icon-star{
-          display: none;
+      .body{
+        width: 69.4%;
+        p{
+          margin: 0 10px;
+        }
+      }
+      .time{
+        width: 18.6%;
+        text-align: right;
+        .name{
+          float: right;
+          margin-right: 5px;
+          font-weight: bold;
+          color: $medium-grey;
+        }
+        .timeago{
+          margin-right: 5px;
         }
       }
     }
-    .body{
-      width: 69.4%;
-      p{
-        margin: 0 10px;
+
+    #chat-input{
+      margin-top: 5px;
+      text-align: center;
+      right:$rightBarWidth;
+      #chatInputContainer{
+        min-width: 200px;
+        height:60px;
+        overflow-x:auto;
       }
-    }
-    .time{
-      width: 18.6%;
-      text-align: right;
-      .name{
-        float: right;
-        margin-right: 5px;
-        font-weight: bold;
-        color: $medium-grey;
+      #profile-icon{
+        width: 50px;
+        height: 50px;
+      } 
+      #write-chat{
+        height: 50px;
+        width: 50%;
+        border-radius: 0;
+        margin: 0;
+        resize: none;
       }
-      .timeago{
-        margin-right: 5px;
+      #send-chat{
+        display: inline-block;
+        width: 50px;
+        border: 1px solid $border-grey;
+        height: 50px;
+        padding: 4px;
+        vertical-align: top;
+        line-height: 3.5em;
+        overflow: hidden;
       }
     }
   }
 
   .right{
-    width:$rightBarWidth;
-    position:fixed;
-    top: $header-height;
-    right: 0px;
-    bottom:0;
+    @media (min-width: 767px){
+      width: 20%;
+    } 
+    @media (max-width: 767px){
+      width: 0%;
+      display: none;
+    }
     #company{
       width: 100%;
       height: 175px;
@@ -166,44 +223,9 @@ $rightBarWidth: 220px;
     display: block; 
     border-left: 1px solid $border-grey;
     width: 100%;
-    height: 100%; 
+    height: 610px; 
   }
 }
 
-#rooms-bottom{
-  margin-top: 5px;
-  margin-bottom: 5px;
-  text-align: center;
-  position:fixed;
-  bottom: 10px;
-  left:0px;
-  right:$rightBarWidth;
-  #chatInputContainer{
-    min-width: 200px;
-    height:60px;
-    overflow-x:auto;
-  }
-  #profile-icon{
-    width: 50px;
-    height: 50px;
-  } 
-  #write-chat{
-    height: 50px;
-    width: 50%;
-    border-radius: 0;
-    margin: 0;
-    resize: none;
-  }
-  #send-chat{
-    display: inline-block;
-    width: 50px;
-    border: 1px solid $border-grey;
-    height: 50px;
-    padding: 4px;
-    vertical-align: top;
-    line-height: 3.5em;
-    overflow: hidden;
-  }
-  
-}
+
 

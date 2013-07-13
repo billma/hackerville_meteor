@@ -1,31 +1,44 @@
 <template name="index">
-<div id="roomListContainer">
+<div id="roomListContainer" class="layout-container">
   <div class="container">
-    <div id="sectionTitle">APIs</div>
-  </div>
-  <hr class="sectionDivider" />
-  <div class="container">
-    {{#each companies }}
-    <div class="row roomContainer">
-      <a href="{{chatPagePath this}}">
-        <div class="span9 offset1">
-          <span class="roomName">{{name}}</span>
-          <span class="roomDescription">{{description}}</span>
-        </div>
-        <div class="span2">
-          <div class="usersCount">
-            <span class="icon-user"></span>
-            {{usersCount}}
-          </div>
-        </div>
-      </a>
+    <div class="row">
+      {{> roomList}}
+      {{> roomListMobile}}
     </div>
-    {{/each}}
   </div>
 </div>
 
-<div id="footer">
+<div id="footer" class="navbar layout-container">
   {{>footerContent}}
+</div>
+</template>
+
+<template name="roomList">
+<div class="hidden-phone">
+  {{#each companies }}
+  <a href="{{chatPagePath this}}" class="room-link">
+    <span class="roomName">{{name}}</span>
+    <span class="roomDescription">{{description}}</span>
+    <span class="usersCount">
+      <span class="icon-user"></span>
+      {{usersCount}}
+    </span>
+  </a>
+  {{/each}}
+</div>
+</template>
+
+<template name="roomListMobile">
+<div class="visible-phone">
+{{#each companies}}
+<a href="{{chatPagePath this}}" class="room-link">
+    <span class="roomName">{{name}}</span>
+    <span class="usersCount">
+      <span class="icon-user"></span>
+      {{usersCount}}
+    </span>
+  </a>
+{{/each}}
 </div>
 </template>
 

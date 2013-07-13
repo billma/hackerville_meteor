@@ -3,36 +3,32 @@
 #roomListContainer{
   font-family:"avg", arial;
   color: $header-dark;
-  padding-top: 30px;
-  padding-bottom: 30px;
   font-size:40px;
   line-height:100%;
   color: $header-dark;
-  .sectionDivider{
-    width:20%;
-    margin-top: 0px;
-    margin-bottom: 0px;
-    border-color: $lightDark;
-  }
-  a{
+  margin-bottom: 80px;
+  .room-link{
+    display: block;
     color: $header-dark;
-  }
-  .roomContainer{
-    padding-top: 20px;
-    padding-bottom: 20px;
-    .roomName{
-      font-size:40px;
-    }
-    .roomDescription{
-      color: $lightDark;
-      font-size:30px;
-      line-height:100%;
-    }
+    padding: 20px 10px;
     &:hover{
-      background:#F2F2F2;
+      background: #F2F2F2;
     }
   }
+  .roomName{
+    font-size:40px;
+  }
+  .roomDescription{
+    color: $lightDark;
+    font-size: 30px;
+    line-height:100%;
+  }
+  .usersCount{
+    float: right;
+  }
+
 }
+
 #footer{
   background:$header-dark;
   font-family:"avg", arial;

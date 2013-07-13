@@ -9,11 +9,13 @@
   <link href="/bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
 </head>
 <body>
-  <div id="header" class="navbar navbar-fixed-top">
-      <div class="row-fluid">
+  <div id="header" class="navbar layout-container">
+    <div class="container">
+      <div class="row">
         {{> headerContent}}
         {{> headerContentMobile}}
       </div>
+    </div>
   </div>
   {{renderPage}}
 </body>
